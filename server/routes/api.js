@@ -1,11 +1,20 @@
-var express = require('express');
-var router = express.Router();
+import {Router} from 'express';
+import User from '../models/User.js';
+import connectDB from '../db/connectDB.js';
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send({
-    message: 'Hello World! from api'
-  })
+var router = Router();
+/* GET user listing. */
+router.get('/users', async function(req, res, next) {
+    await connectDB();
+    let allUsers = await User.find({})
+    res.send({allUsers});
 });
 
-module.exports = router;
+router.post('/users', async function(req, res, next) {
+    await connectDB();
+    let newUser = new User(req.body);
+    await newUser.save();
+    res.send({newUser});
+});
+
+export default router;
