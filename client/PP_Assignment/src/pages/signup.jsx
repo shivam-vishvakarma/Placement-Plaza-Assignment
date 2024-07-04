@@ -77,7 +77,7 @@ export default function Signup() {
           Details are saved successfully! Go to{" "}
           <Link to="/data" className="text-blue-500">
             /data
-          </Link>
+          </Link>{" "}
           to view the data.
         </div>
       </div>
